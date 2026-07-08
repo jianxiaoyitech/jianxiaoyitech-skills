@@ -161,17 +161,6 @@ def resolve_auth(args: argparse.Namespace) -> ResolvedAuth:
             source="--api-key",
         )
 
-    env_key = first_env(
-        "RIGHT_CODES_API_KEY",
-        "RC_API_KEY",
-    )
-    if env_key:
-        return ResolvedAuth(
-            harness=args.harness if args.harness != "auto" else "env",
-            api_key=env_key,
-            source="environment",
-        )
-
     harnesses = (
         [args.harness] if args.harness != "auto" else detect_harness_order()
     )

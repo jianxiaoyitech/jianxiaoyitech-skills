@@ -66,7 +66,6 @@ Resolution order:
 
 1. Harness-specific environment variables
 2. Harness-specific config files
-3. Fallback override variables such as `RIGHT_CODES_API_KEY`
 
 Harness expectations:
 
@@ -152,12 +151,12 @@ When the query script exits:
 - Report the selected model.
 - Report the resolved output directory.
 - Report the saved local file paths.
-- Do not expose the remote download URL after download succeeds.
+- Always expose the image URL in the final result.
 - Mention the `task_id`.
 
 If the client renders local images inline, it may show them.
 Do not rely on inline rendering.
-Always provide local file paths only.
+Provide local file paths and image URLs.
 
 ## Failure Phase
 

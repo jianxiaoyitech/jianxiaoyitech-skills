@@ -46,7 +46,7 @@ def main() -> int:
                 "created_at": result.get("created_at"),
             }
         )
-        print(json.dumps(sanitize_result(result), ensure_ascii=False, indent=2))
+        print(json.dumps(result, ensure_ascii=False, indent=2))
         return 0
 
     result = rc_draw.poll_task(
@@ -71,25 +71,13 @@ def main() -> int:
                 "auth_source": auth.source,
                 "output_dir": output_dir_str,
                 "downloads": downloads,
-                "result": sanitize_result(result),
+                "result": result,
             },
             ensure_ascii=False,
             indent=2,
         )
     )
     return 0
-
-
-def sanitize_result(result: dict) -> dict:
-    if "data" in result and isinstance(result["data"], list):
-        sanitized = dict(result)
-        sanitized["data"] = [{} for _ in result["data"]]
-        return sanitized
-    if "candidates" in result and isinstance(result["candidates"], list):
-        sanitized = dict(result)
-        sanitized["candidates"] = [{"content": {"parts": []}} for _ in result["candidates"]]
-        return sanitized
-    return result
 
 
 if __name__ == "__main__":
